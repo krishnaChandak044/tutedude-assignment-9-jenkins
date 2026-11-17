@@ -26,4 +26,5 @@ The install mappings are implemented in `deployment/bootstrap-ubuntu.sh`. The he
 - `deployment/nginx/tutedude.conf` — application and webhook proxy routes.
 - `jenkins/plugins.txt` — Jenkins plugin names.
 - `Assignment_Report.docx` and `docs/Assignment_Report.md` — implementation, validation, and outstanding requirements.
+- `architecture-target.png` — target system diagram, clearly labeled as not yet deployed.
 - `evidence/local-validation.log` and `evidence/jenkins-controller.log` — actual local checks and controller status. No live EC2, webhook, or successful build screenshots are included.

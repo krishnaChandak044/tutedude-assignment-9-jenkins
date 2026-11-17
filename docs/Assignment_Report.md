@@ -14,6 +14,8 @@ Deploy a Flask backend and an Express frontend to Amazon EC2, then automate vali
 
 `SUBMISSION_MANIFEST.md` lists the exact paths of the files in the ZIP and maps the deployment helper and systemd source files to their installation destinations.
 
+`architecture-target.png` diagrams the intended EC2, Nginx, application, Jenkins, and webhook design. It is labeled as a target architecture; it does not represent a verified live deployment.
+
 ## Checks performed
 
 - `bash -n` on the bootstrap and both deployment helpers: passed.
@@ -34,6 +36,7 @@ See `evidence/local-validation.log` and `evidence/jenkins-controller.log` for th
 | Jenkins controller and successful build | Plugin list and bootstrap are included. The local controller started, but no build ran because its built-in node was offline. |
 | GitHub webhook | Nginx routing and pipeline trigger configuration are included. No live webhook registration or delivery is claimed. |
 | Required screenshots | Not included. Genuine EC2, running application, terminal, and successful Jenkins build screenshots must be captured after deployment. |
+| Architecture diagram | Included as `architecture-target.png`; it depicts the intended design and is not deployment evidence. |
 
 ## Repositories
 
