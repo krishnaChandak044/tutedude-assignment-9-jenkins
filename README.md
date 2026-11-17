@@ -10,7 +10,9 @@ The EC2 package is under `deployment/`: Ubuntu bootstrap, systemd/PM2 units, Ngi
 
 ## Current verification status
 
-The source, pipeline definitions and deployment scripts are included. The local run will be recorded in `evidence/` once Jenkins is installed and the pipeline succeeds. AWS currently has zero EC2 instances in `ap-southeast-2`; CloudShell reports account verification in progress. No public EC2 IP, remote Jenkins build, GitHub webhook delivery, or live screenshot is claimed unless it is actually captured. An EC2 deployment incurs usage charges; the bootstrap does not create AWS resources.
+The source, pipeline definitions and deployment scripts are included. Shell, Python, Node.js, and Docker Compose configuration checks passed and are recorded in `evidence/local-validation.log`. Jenkins 2.580.2 started on loopback, but its built-in node stayed offline because the host had 488.60 MiB free, below Jenkins's 1 GiB threshold; no Jenkins build ran. AWS currently has zero EC2 instances in `ap-southeast-2`, and CloudShell reports account verification in progress. No public EC2 IP, remote build, GitHub webhook delivery, or live screenshot is claimed. The bootstrap does not create AWS resources.
+
+The mentor's live deployment, process-manager runtime, webhook, and screenshot requirements still need an active EC2 host and a successful pipeline run. The corrected package is not evidence of a completed live deployment.
 
 ## Repositories
 

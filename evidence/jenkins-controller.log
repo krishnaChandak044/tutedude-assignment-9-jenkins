@@ -1,0 +1,5 @@
+Local Jenkins controller check
+UTC: 2026-11-17 06:38:02
+Controller version: 2.580.2
+2026-11-17 06:33:17.467+0000 [id=40]	INFO	hudson.lifecycle.Lifecycle#onReady: Jenkins is fully up and running
+{"_class":"hudson.model.ComputerSet","computer":[{"_class":"hudson.model.Hudson$MasterComputer","displayName":"Built-In Node","offline":true,"offlineCauseReason":"Disk space is below threshold of 1.00 GiB. Only 488.60 MiB out of 228.27 GiB left on /Users/LENOVO/Documents/Codex/2026-11-17/i-h/work/jenkins-home.","temporarilyOffline":true}]}

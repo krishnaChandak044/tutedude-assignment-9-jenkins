@@ -9,4 +9,4 @@ Add dated, unedited screenshots and logs here after the corresponding step actua
 - `github-webhook.png`: GitHub webhook delivery with a successful response.
 - `build-logs/`: corresponding console text logs with secrets redacted.
 
-No live EC2/Jenkins/webhook screenshots are included until those services are actually deployed and run. Local runtime evidence is recorded separately when generated.
+`local-validation.log` records the checks that passed and explains why a Jenkins build could not run on this host. No live EC2/Jenkins/webhook screenshots are included because those services have not been deployed and verified.

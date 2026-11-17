@@ -1,0 +1,18 @@
+Assignment 9 local checks
+UTC: 2026-11-17 06:36:18
+
+$ bash -n deployment/bootstrap-ubuntu.sh deployment/scripts/tutedude-deploy-flask deployment/scripts/tutedude-deploy-express
+PASS
+
+$ python3 -m compileall -q app/backend
+PASS
+
+$ node --check app/frontend/server.js && node --check deployment/pm2/ecosystem.config.cjs
+PASS
+
+$ docker compose -f app/docker-compose.yml config --quiet
+PASS
+
+Jenkins controller: 2.580.2, bound to 127.0.0.1:8180.
+No pipeline build was run: Jenkins marked its built-in node offline because only 488.60 MiB remained, below its 1.00 GiB threshold.
+No EC2 instance, public deployment, webhook delivery, or remote build is claimed.

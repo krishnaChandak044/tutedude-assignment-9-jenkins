@@ -6,8 +6,8 @@ The first review requested visible Jenkinsfile definitions, process-manager conf
 
 ## Verification
 
-Record the real Jenkins run output and local service health response under `evidence/` after execution. The AWS console currently reports zero EC2 instances in `ap-southeast-2`, and CloudShell is still blocked by account verification. There is therefore no active EC2 public URL, remote Jenkins controller, GitHub webhook delivery, or live AWS screenshot in this package. The local run validates Jenkins and the application deployment path but does not substitute for the reviewer's EC2 requirement.
+Shell syntax, Python compilation, Node.js syntax, and Docker Compose configuration checks passed; see `evidence/local-validation.log`. Jenkins 2.580.2 started on loopback, but Jenkins marked its built-in node offline because only 488.60 MiB remained, below its 1 GiB threshold. No Jenkins pipeline build ran. The AWS console showed zero EC2 instances in `ap-southeast-2`, and CloudShell remained in account verification. There is no active EC2 public URL, remote Jenkins build, GitHub webhook delivery, or live deployment screenshot in this package.
 
 ## Resubmission
 
-The updated ZIP must include this report and the root-level pipeline files. After an EC2 host and public Jenkins webhook route are available, capture the required deployment and webhook evidence before resubmitting if the mentor requires live proof.
+The updated ZIP includes this report and the root-level pipeline files. The live EC2 deployment, systemd and PM2 runtime, webhook delivery, and screenshots remain to be completed before the mentor's full requirements are met.
