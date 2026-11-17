@@ -8,7 +8,7 @@ The portal ZIP is named `Jenkins_CICD_Krishna.zip` and contains one top-level fo
 
 The feedback requested root-level Jenkinsfiles, Flask under systemd, Express under PM2, both apps on an EC2 public IP, a Jenkins controller with plugins, GitHub webhooks, and screenshots/build evidence. The main pipeline is now visible at the repository root as `Jenkinsfile`; `Jenkinsfile.flask` and `Jenkinsfile.express` define separate app pipelines. `Jenkinsfile.local` runs the same source through a local Docker Compose deployment for a reproducible non-AWS CI run.
 
-The EC2 package is under `deployment/`: Ubuntu bootstrap, systemd/PM2 units, Nginx routing, restricted deployment helpers and detailed setup instructions. Jenkins plugin names are listed in `jenkins/plugins.txt`. The top-level pipelines deploy from a Jenkins workspace on the EC2 host and verify health checks. The local pipeline publishes the demo at `http://localhost:3100`.
+The EC2 package is under `deployment/`: Ubuntu bootstrap, systemd/PM2 units, Nginx routing, restricted deployment helpers and detailed setup instructions. Jenkins plugin names are listed in `jenkins/plugins.txt`. The top-level pipelines are configured to deploy from a Jenkins workspace on the EC2 host and verify health checks. `Jenkinsfile.local` defines a local Compose deployment at `http://localhost:3100`, but has not been run.
 
 ## Current verification status
 
