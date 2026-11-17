@@ -1,0 +1,12 @@
+pipeline {
+  agent any
+  options { timestamps(); disableConcurrentBuilds() }
+  triggers { githubPush() }
+  stages {
+    stage('Checkout') { steps { checkout scm } }
+    stage('Install') { steps { dir('app/frontend') { sh 'npm ci' } } }
+    stage('Validate') { steps { dir('app/frontend') { sh 'node --check server.js' } } }
+    stage('Deploy') { steps { sh 'sudo rsync -a --delete app/frontend/ /opt/tutedude/express/ && cd /opt/tutedude/express && npm ci --omit=dev && (pm2 restart express || pm2 start server.js --name express) && pm2 save' } }
+  }
+  post { always { cleanWs() } }
+}

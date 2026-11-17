@@ -1,0 +1,12 @@
+pipeline {
+  agent any
+  options { timestamps(); disableConcurrentBuilds() }
+  triggers { githubPush() }
+  stages {
+    stage('Checkout') { steps { checkout scm } }
+    stage('Install') { steps { sh 'python3 -m venv .venv && . .venv/bin/activate && pip install -r app/backend/requirements.txt' } }
+    stage('Validate') { steps { sh 'python -m compileall -q app/backend' } }
+    stage('Deploy') { steps { sh 'sudo rsync -a --delete app/backend/ /opt/tutedude/flask/ && sudo systemctl restart flask.service && sudo systemctl is-active --quiet flask.service' } }
+  }
+  post { always { cleanWs() } }
+}
