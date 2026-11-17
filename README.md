@@ -2,6 +2,8 @@
 
 **Repository:** https://github.com/krishnaChandak044/tutedude-assignment-9-jenkins
 
+The portal ZIP is named `Jenkins_CICD_Krishna.zip` and contains one top-level folder named `Jenkins_CICD_Krishna/`, as required by the assignment instructions.
+
 ## What the reviewer asked to see
 
 The feedback requested root-level Jenkinsfiles, Flask under systemd, Express under PM2, both apps on an EC2 public IP, a Jenkins controller with plugins, GitHub webhooks, and screenshots/build evidence. The main pipeline is now visible at the repository root as `Jenkinsfile`; `Jenkinsfile.flask` and `Jenkinsfile.express` define separate app pipelines. `Jenkinsfile.local` runs the same source through a local Docker Compose deployment for a reproducible non-AWS CI run.

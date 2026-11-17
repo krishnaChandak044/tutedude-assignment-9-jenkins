@@ -10,4 +10,4 @@ Shell syntax, Python compilation, Node.js syntax, and Docker Compose configurati
 
 ## Resubmission
 
-The updated ZIP includes this report and the root-level pipeline files. The live EC2 deployment, systemd and PM2 runtime, webhook delivery, and screenshots remain to be completed before the mentor's full requirements are met.
+The ZIP is named `Jenkins_CICD_Krishna.zip` and contains a single top-level folder named `Jenkins_CICD_Krishna/`, with this report and the root-level pipeline files. The live EC2 deployment, systemd and PM2 runtime, webhook delivery, and screenshots remain to be completed before the mentor's full requirements are met.
