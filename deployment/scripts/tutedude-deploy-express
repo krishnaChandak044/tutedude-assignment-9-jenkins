@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+workspace=${1:?workspace path required}
+case "$workspace" in /var/lib/jenkins/workspace/*) ;; *) echo 'workspace must be under /var/lib/jenkins/workspace' >&2; exit 2;; esac
+src="$workspace/app/frontend/"
+test -f "$src/server.js"
+install -d -o tutedude -g tutedude-deploy /opt/tutedude/express
+rsync -a --delete --chown=tutedude:tutedude-deploy "$src" /opt/tutedude/express/
+runuser -u tutedude -- npm ci --omit=dev --prefix /opt/tutedude/express
+install -o tutedude -g tutedude-deploy -m 0644 "$workspace/deployment/pm2/ecosystem.config.cjs" /opt/tutedude/express/ecosystem.config.cjs
+runuser -u tutedude -- env PM2_HOME=/home/tutedude/.pm2 pm2 startOrRestart /opt/tutedude/express/ecosystem.config.cjs --update-env
+runuser -u tutedude -- env PM2_HOME=/home/tutedude/.pm2 pm2 save

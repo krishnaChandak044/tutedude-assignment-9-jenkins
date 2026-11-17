@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+workspace=${1:?workspace path required}
+case "$workspace" in /var/lib/jenkins/workspace/*) ;; *) echo 'workspace must be under /var/lib/jenkins/workspace' >&2; exit 2;; esac
+src="$workspace/app/backend/"
+test -f "$src/app.py"
+install -d -o tutedude -g tutedude-deploy /opt/tutedude/flask
+rsync -a --delete --chown=tutedude:tutedude-deploy "$src" /opt/tutedude/flask/
+python3 -m venv /opt/tutedude/flask/.venv
+/opt/tutedude/flask/.venv/bin/pip install --disable-pip-version-check -r /opt/tutedude/flask/requirements.txt
+systemctl restart tutedude-flask.service
+systemctl is-active --quiet tutedude-flask.service

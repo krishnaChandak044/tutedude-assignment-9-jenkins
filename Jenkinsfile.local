@@ -1,0 +1,22 @@
+pipeline {
+  agent any
+  options { timestamps(); disableConcurrentBuilds() }
+  stages {
+    stage('Checkout') { steps { checkout scm } }
+    stage('Install and validate') {
+      steps {
+        sh 'python3 -m venv .venv && . .venv/bin/activate && pip install --disable-pip-version-check -r app/backend/requirements.txt'
+        dir('app/frontend') { sh 'npm ci' }
+        sh 'python -m compileall -q app/backend'
+        dir('app/frontend') { sh 'node --check server.js' }
+      }
+    }
+    stage('Build and deploy locally') {
+      steps {
+        sh 'APP_PORT=3100 docker compose -p tutedude-assignment9 -f app/docker-compose.yml up --build -d'
+        sh 'for i in $(seq 1 30); do curl --fail --silent http://127.0.0.1:3100/api/health && exit 0; sleep 2; done; docker compose -p tutedude-assignment9 -f app/docker-compose.yml logs; exit 1'
+      }
+    }
+  }
+  post { always { cleanWs() } }
+}

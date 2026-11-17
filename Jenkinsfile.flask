@@ -1,0 +1,17 @@
+pipeline {
+  agent any
+  options { timestamps(); disableConcurrentBuilds() }
+  triggers { githubPush() }
+  stages {
+    stage('Checkout') { steps { checkout scm } }
+    stage('Install') { steps { sh 'python3 -m venv .venv && . .venv/bin/activate && pip install --disable-pip-version-check -r app/backend/requirements.txt' } }
+    stage('Validate') { steps { sh 'python -m compileall -q app/backend' } }
+    stage('Deploy Flask') {
+      steps {
+        sh 'sudo /usr/local/sbin/tutedude-deploy-flask "$WORKSPACE"'
+        sh 'curl --fail --silent --show-error http://127.0.0.1:5000/api/ready'
+      }
+    }
+  }
+  post { always { cleanWs() } }
+}

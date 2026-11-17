@@ -1,0 +1,17 @@
+pipeline {
+  agent any
+  options { timestamps(); disableConcurrentBuilds() }
+  triggers { githubPush() }
+  stages {
+    stage('Checkout') { steps { checkout scm } }
+    stage('Install') { steps { dir('app/frontend') { sh 'npm ci' } } }
+    stage('Validate') { steps { dir('app/frontend') { sh 'node --check server.js' } } }
+    stage('Deploy Express') {
+      steps {
+        sh 'sudo /usr/local/sbin/tutedude-deploy-express "$WORKSPACE"'
+        sh 'curl --fail --silent --show-error http://127.0.0.1:3000/api/health'
+      }
+    }
+  }
+  post { always { cleanWs() } }
+}

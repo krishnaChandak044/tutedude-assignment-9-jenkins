@@ -4,9 +4,14 @@ pipeline {
   triggers { githubPush() }
   stages {
     stage('Checkout') { steps { checkout scm } }
-    stage('Install') { steps { sh 'npm ci' } }
-    stage('Validate') { steps { sh 'node --check server.js' } }
-    stage('Deploy') { steps { sh 'sudo rsync -a --delete server.js package.json /opt/tutedude/express/ && cd /opt/tutedude/express && npm ci --omit=dev && (pm2 restart express || pm2 start server.js --name express) && pm2 save' } }
+    stage('Install') { steps { dir('app/frontend') { sh 'npm ci' } } }
+    stage('Validate') { steps { dir('app/frontend') { sh 'node --check server.js' } } }
+    stage('Deploy Express') {
+      steps {
+        sh 'sudo /usr/local/sbin/tutedude-deploy-express "$WORKSPACE"'
+        sh 'curl --fail --silent --show-error http://127.0.0.1:3000/api/health'
+      }
+    }
   }
   post { always { cleanWs() } }
 }

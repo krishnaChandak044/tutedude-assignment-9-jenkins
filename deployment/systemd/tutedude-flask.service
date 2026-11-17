@@ -1,0 +1,21 @@
+[Unit]
+Description=TuteDude Flask backend
+After=network.target
+
+[Service]
+Type=simple
+User=tutedude
+Group=tutedude-deploy
+WorkingDirectory=/opt/tutedude/flask
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/tutedude/flask/.venv/bin/gunicorn --bind 127.0.0.1:5000 --workers 2 app:app
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/tutedude/flask
+
+[Install]
+WantedBy=multi-user.target
