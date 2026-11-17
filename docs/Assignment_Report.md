@@ -12,6 +12,8 @@ Deploy a Flask backend and an Express frontend to Amazon EC2, then automate vali
 - The Flask systemd unit runs Gunicorn on localhost port 5000. PM2 manages Express on localhost port 3000. Nginx serves the app on port 80 and forwards only `/github-webhook/` to Jenkins; the instructions keep Jenkins administration private.
 - `jenkins/plugins.txt` lists the Jenkins plugins. `deployment/README.md` describes the host setup, pipeline job paths, webhook configuration, and verification commands.
 
+`SUBMISSION_MANIFEST.md` lists the exact paths of the files in the ZIP and maps the deployment helper and systemd source files to their installation destinations.
+
 ## Checks performed
 
 - `bash -n` on the bootstrap and both deployment helpers: passed.
