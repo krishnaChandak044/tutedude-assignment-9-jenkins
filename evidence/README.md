@@ -9,4 +9,6 @@ Add dated, unedited screenshots and logs here after the corresponding step actua
 - `github-webhook.png`: GitHub webhook delivery with a successful response.
 - `build-logs/`: corresponding console text logs with secrets redacted.
 
-`local-validation.log` records the checks that passed and explains why a Jenkins build could not run on this host. No live EC2/Jenkins/webhook screenshots are included because those services have not been deployed and verified.
+`ec2-live-validation.log` records genuine checks against EC2: public HTTP status, Flask readiness, health through Nginx and Express, active systemd services, and listener bindings. `local-validation.log` and `jenkins-controller.log` are older local checks, not proof of a successful EC2 Jenkins build.
+
+`aws-verification-blocker.png` is a genuine screenshot of the AWS console reporting that account verification was in progress and preventing CloudShell creation. EC2 launch later succeeded, so this is historical context only. Jenkins setup, successful pipeline runs, webhook deliveries, and their screenshots are still pending. Follow the checklist in `../deployment/README.md`.

@@ -12,7 +12,7 @@ apt-get update
 apt-get install -y ca-certificates curl gnupg rsync nginx python3 python3-venv python3-pip openjdk-21-jre
 
 install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key -o /etc/apt/keyrings/jenkins-keyring.asc
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key -o /etc/apt/keyrings/jenkins-keyring.asc
 chmod 0644 /etc/apt/keyrings/jenkins-keyring.asc
 echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" > /etc/apt/sources.list.d/jenkins.list
 
@@ -20,6 +20,14 @@ curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 apt-get update
 apt-get install -y jenkins nodejs
 npm install --global pm2
+
+# The Debian package listens on all interfaces by default. Bind Jenkins to
+# loopback because Nginx exposes only the webhook route and admins use SSH.
+install -d -m 0755 /etc/systemd/system/jenkins.service.d
+cat > /etc/systemd/system/jenkins.service.d/override.conf <<'JENKINS_OVERRIDE'
+[Service]
+Environment="JENKINS_LISTEN_ADDRESS=127.0.0.1"
+JENKINS_OVERRIDE
 
 getent group tutedude-deploy >/dev/null || groupadd --system tutedude-deploy
 id tutedude >/dev/null 2>&1 || useradd --system --create-home --shell /usr/sbin/nologin tutedude

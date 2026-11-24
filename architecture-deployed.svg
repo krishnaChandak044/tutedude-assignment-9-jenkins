@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="920" viewBox="0 0 1440 920" role="img" aria-labelledby="title desc">
+  <title id="title">TuteDude Assignment 9 deployed EC2 architecture</title>
+  <desc id="desc">Verified EC2 services in Sydney with Jenkins kept private. The GitHub webhook and Jenkins build are configured in source but await live verification.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#40516b"/></marker>
+    <marker id="arrowPending" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#a36a00"/></marker>
+    <style>
+      text{font-family:Inter,Arial,sans-serif;fill:#172033}.title{font-size:34px;font-weight:700}.sub{font-size:17px;fill:#58677d}.group{fill:#f5f7fb;stroke:#9aa9bc;stroke-width:2}.box{fill:#fff;stroke:#60738e;stroke-width:2}.head{font-size:21px;font-weight:700}.body{font-size:16px}.small{font-size:14px;fill:#596980}.actual{stroke:#40516b;stroke-width:3;fill:none;marker-end:url(#arrow)}.pending{stroke:#a36a00;stroke-width:3;stroke-dasharray:10 8;fill:none;marker-end:url(#arrowPending)}.tag{font-size:14px;font-weight:700;fill:#146c43}.pendingTag{font-size:14px;font-weight:700;fill:#8a5700}
+    </style>
+  </defs>
+  <rect width="1440" height="920" fill="#fff"/>
+  <text x="64" y="72" class="title">TuteDude Assignment 9 — deployed EC2 architecture</text>
+  <text x="64" y="108" class="sub">Verified infrastructure • 25 Nov 2026 • ap-southeast-2 (Sydney) • Ubuntu 24.04 • t3.small • 20 GiB gp3</text>
+
+  <rect x="48" y="150" width="1344" height="590" rx="22" class="group"/>
+  <text x="78" y="192" class="head">Amazon EC2 · 13.211.139.18</text>
+
+  <rect x="94" y="250" width="255" height="142" rx="14" class="box"/>
+  <text x="120" y="289" class="head">Internet clients</text>
+  <text x="120" y="322" class="body">HTTP app access</text>
+  <text x="120" y="350" class="body">TCP 80</text>
+  <text x="120" y="376" class="tag">Verified live</text>
+
+  <rect x="425" y="250" width="270" height="142" rx="14" class="box"/>
+  <text x="451" y="289" class="head">Nginx reverse proxy</text>
+  <text x="451" y="322" class="body">Public listener :80</text>
+  <text x="451" y="350" class="body">/ → Express · /github-webhook/ → Jenkins</text>
+  <text x="451" y="376" class="tag">Config and service verified</text>
+
+  <rect x="788" y="225" width="260" height="142" rx="14" class="box"/>
+  <text x="814" y="264" class="head">Express frontend</text>
+  <text x="814" y="297" class="body">PM2 Runtime under systemd</text>
+  <text x="814" y="325" class="body">127.0.0.1:3000</text>
+  <text x="814" y="351" class="tag">Verified active</text>
+
+  <rect x="1120" y="225" width="230" height="142" rx="14" class="box"/>
+  <text x="1146" y="264" class="head">Flask API</text>
+  <text x="1146" y="297" class="body">Gunicorn under systemd</text>
+  <text x="1146" y="325" class="body">127.0.0.1:5000</text>
+  <text x="1146" y="351" class="tag">Verified active</text>
+
+  <rect x="788" y="490" width="260" height="142" rx="14" class="box"/>
+  <text x="814" y="529" class="head">Jenkins controller</text>
+  <text x="814" y="562" class="body">127.0.0.1:8080</text>
+  <text x="814" y="590" class="body">No public admin port</text>
+  <text x="814" y="616" class="tag">Service verified; first-run setup pending</text>
+
+  <rect x="425" y="490" width="270" height="142" rx="14" class="box"/>
+  <text x="451" y="529" class="head">Administrator</text>
+  <text x="451" y="562" class="body">SSH from allow-listed IP</text>
+  <text x="451" y="590" class="body">Tunnel to Jenkins loopback</text>
+  <text x="451" y="616" class="tag">Tunnel verified</text>
+
+  <rect x="94" y="490" width="255" height="142" rx="14" class="box"/>
+  <text x="120" y="529" class="head">GitHub repository</text>
+  <text x="120" y="562" class="body">Push event webhook</text>
+  <text x="120" y="590" class="body">Public HTTP endpoint</text>
+  <text x="120" y="616" class="pendingTag">Live delivery pending</text>
+
+  <path d="M349 320 H425" class="actual"/>
+  <path d="M695 320 H788" class="actual"/>
+  <path d="M1048 296 H1120" class="actual"/>
+  <path d="M562 392 V430 H918 V490" class="pending"/>
+  <path d="M349 560 C385 560 390 362 425 362" class="pending"/>
+  <path d="M695 560 H788" class="actual"/>
+
+  <text x="64" y="798" class="small">Solid arrows: verified live service path. Dashed arrows: intended automation path, pending Jenkins job setup and a successful webhook-triggered build.</text>
+  <text x="64" y="832" class="small">Security group: public TCP 80; SSH TCP 22 restricted to the administrator's IPv4 /32; no public 3000, 5000, or 8080.</text>
+  <text x="64" y="866" class="small">The public app, API health response, service status, and loopback bindings were checked directly on the live host.</text>
+</svg>

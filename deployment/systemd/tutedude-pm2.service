@@ -4,16 +4,15 @@ After=network.target tutedude-flask.service
 Wants=tutedude-flask.service
 
 [Service]
-Type=forking
+Type=simple
 User=tutedude
 Group=tutedude-deploy
 Environment=PM2_HOME=/home/tutedude/.pm2
 WorkingDirectory=/opt/tutedude/express
-ExecStart=/usr/bin/pm2 resurrect
-ExecReload=/usr/bin/pm2 reload all
-ExecStop=/usr/bin/pm2 kill
+ExecStart=/usr/bin/pm2-runtime /opt/tutedude/express/ecosystem.config.cjs
 Restart=on-failure
 RestartSec=3
+UMask=0027
 
 [Install]
 WantedBy=multi-user.target
