@@ -20,9 +20,11 @@ The assignment is now deployed to Ubuntu 24.04 on EC2 instance `i-02064e2837ce19
 
 Live checks have returned HTTP 200 for the public app, Flask readiness JSON `{"ready":true}`, and the backend health JSON through Express and Nginx. `systemd` reports Jenkins, Nginx, Flask, and the PM2 Runtime service active. The first host bootstrap needed the current Jenkins 2026 signing key; the bootstrap now uses that key. The Jenkins Flask pipeline validates with Python 3 and both app pipelines wait for their local health checks before reporting success. Express uses `pm2-runtime` in foreground mode because the background PM2 daemon could not spawn on this host.
 
-Jenkins initial setup and the Pipeline job are still pending. No Jenkins build, GitHub webhook delivery, or push-triggered deployment is claimed yet. Add the corresponding real screenshots and build logs to `evidence/` after those steps complete. The public IPv4 may change if the instance is stopped and started.
+Jenkins 2.580.2 is active on loopback, with separate `tutedude-flask` and `tutedude-express` Pipeline jobs using the root-level app-specific Jenkinsfiles. GitHub has an active push webhook to `/github-webhook/`; delivery returned HTTP 200 and a push-triggered Express build completed successfully. The Flask pipeline also completed successfully after an initial workspace permission issue, and the current Flask app is deployed. The initial failed builds and their causes are preserved honestly in the console logs. The public IPv4 may change if the instance is stopped and started.
 
-[`architecture-deployed.svg`](architecture-deployed.svg) diagrams the verified EC2 services and marks the Jenkins job and GitHub webhook path as pending until those are exercised.
+[`architecture-deployed.svg`](architecture-deployed.svg) diagrams the verified EC2 services, webhook delivery, Jenkins controller, and deployment path.
+
+Evidence includes live validation output and genuine successful Jenkins console logs under `evidence/`. The app screenshot is a real capture from before the final backend message update; the final backend response is recorded in `ec2-live-validation.log`. The Chrome accessibility bridge timed out during this final evidence pass, so this ZIP does not claim to include Jenkins, AWS console, or GitHub UI screenshots.
 
 ## Repositories
 

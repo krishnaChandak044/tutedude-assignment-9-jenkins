@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="920" viewBox="0 0 1440 920" role="img" aria-labelledby="title desc">
   <title id="title">TuteDude Assignment 9 deployed EC2 architecture</title>
-  <desc id="desc">Verified EC2 services in Sydney with Jenkins kept private. The GitHub webhook and Jenkins build are configured in source but await live verification.</desc>
+  <desc id="desc">Verified EC2 services in Sydney with Jenkins kept private. GitHub push webhook deliveries and app deployment pipelines have been exercised.</desc>
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#40516b"/></marker>
     <marker id="arrowPending" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#a36a00"/></marker>
@@ -23,9 +23,9 @@
 
   <rect x="425" y="250" width="270" height="142" rx="14" class="box"/>
   <text x="451" y="289" class="head">Nginx reverse proxy</text>
-  <text x="451" y="322" class="body">Public listener :80</text>
-  <text x="451" y="350" class="body">/ → Express · /github-webhook/ → Jenkins</text>
-  <text x="451" y="376" class="tag">Config and service verified</text>
+  <text x="451" y="320" class="body">Public listener :80</text>
+  <text x="451" y="346" class="body">/ → Express</text>
+  <text x="451" y="372" class="body">/github-webhook/ → Jenkins</text>
 
   <rect x="788" y="225" width="260" height="142" rx="14" class="box"/>
   <text x="814" y="264" class="head">Express frontend</text>
@@ -43,7 +43,7 @@
   <text x="814" y="529" class="head">Jenkins controller</text>
   <text x="814" y="562" class="body">127.0.0.1:8080</text>
   <text x="814" y="590" class="body">No public admin port</text>
-  <text x="814" y="616" class="tag">Service verified; first-run setup pending</text>
+  <text x="814" y="616" class="tag">Active; jobs and builds verified</text>
 
   <rect x="425" y="490" width="270" height="142" rx="14" class="box"/>
   <text x="451" y="529" class="head">Administrator</text>
@@ -55,16 +55,18 @@
   <text x="120" y="529" class="head">GitHub repository</text>
   <text x="120" y="562" class="body">Push event webhook</text>
   <text x="120" y="590" class="body">Public HTTP endpoint</text>
-  <text x="120" y="616" class="pendingTag">Live delivery pending</text>
+  <text x="120" y="616" class="tag">Push delivery HTTP 200</text>
 
   <path d="M349 320 H425" class="actual"/>
   <path d="M695 320 H788" class="actual"/>
   <path d="M1048 296 H1120" class="actual"/>
-  <path d="M562 392 V430 H918 V490" class="pending"/>
-  <path d="M349 560 C385 560 390 362 425 362" class="pending"/>
+  <path d="M562 392 V430 H918 V490" class="actual"/>
+  <path d="M349 560 C385 560 390 362 425 362" class="actual"/>
   <path d="M695 560 H788" class="actual"/>
+  <path d="M918 490 V367" class="actual"/>
+  <path d="M1048 560 H1080 V296 H1120" class="actual"/>
 
-  <text x="64" y="798" class="small">Solid arrows: verified live service path. Dashed arrows: intended automation path, pending Jenkins job setup and a successful webhook-triggered build.</text>
+  <text x="64" y="798" class="small">Solid arrows: verified live app, webhook, Jenkins, and deployment paths.</text>
   <text x="64" y="832" class="small">Security group: public TCP 80; SSH TCP 22 restricted to the administrator's IPv4 /32; no public 3000, 5000, or 8080.</text>
   <text x="64" y="866" class="small">The public app, API health response, service status, and loopback bindings were checked directly on the live host.</text>
 </svg>

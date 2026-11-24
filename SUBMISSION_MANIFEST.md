@@ -29,9 +29,13 @@ The install mappings are implemented in `deployment/bootstrap-ubuntu.sh`. The he
 - `jenkins/plugins.txt` — Jenkins plugin names.
 - `Assignment_Report.docx` and `docs/Assignment_Report.md` — implementation, validation, and outstanding requirements.
 - `architecture-target.png` — original target diagram.
-- `architecture-deployed.svg` — current EC2 topology; dashed arrows label the Jenkins/webhook flow that still needs live verification.
+- `architecture-deployed.svg` — verified EC2 topology, webhook route, private Jenkins controller, and deployment path.
 - `evidence/local-validation.log` and `evidence/jenkins-controller.log` — older local checks and local controller status.
-- `evidence/ec2-live-validation.log` — actual EC2 checks for public app HTTP 200, Flask readiness, health through Nginx/Express, active services, and listener bindings.
+- `evidence/ec2-live-validation.log` — fresh EC2 checks for public app HTTP 200, Flask readiness and final health response, active services, and listener bindings.
+- `evidence/ec2-app-live.png` — genuine Chrome capture of the public app before the final backend response text update; use the log for the current API response.
+- `evidence/build-logs/` — successful Flask and Express Jenkins console logs. Express build #6 was push-triggered by GitHub; both live pipelines are separately configured.
+- `evidence/github-webhook-deliveries.json` — real push and ping delivery records with HTTP response codes.
+- `evidence/README.md` — clarifies which evidence is current and which historical context/screenshots are unavailable.
 - `evidence/aws-verification-blocker.png` — genuine historical evidence of the earlier CloudShell verification message; EC2 launch later succeeded.
 
-Jenkins first-run setup, pipeline execution, webhook delivery, and the corresponding screenshots are still outstanding. The runbook lists the remaining evidence.
+Live deployment and both Jenkins pipelines are verified. GitHub push delivery returned HTTP 200 and triggered a successful Express build. The package does not include AWS-console, Jenkins UI, or GitHub UI screenshots; see `evidence/README.md` for the evidence limitations and current logs.
