@@ -9,4 +9,4 @@ rsync -a --delete --chown=tutedude:tutedude-deploy "$src" /opt/tutedude/flask/
 python3 -m venv /opt/tutedude/flask/.venv
 /opt/tutedude/flask/.venv/bin/pip install --disable-pip-version-check -r /opt/tutedude/flask/requirements.txt
 systemctl restart tutedude-flask.service
-systemctl is-active --quiet tutedude-flask.service
+systemctl is-active tutedude-flask.service

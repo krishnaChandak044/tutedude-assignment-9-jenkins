@@ -9,4 +9,4 @@ rsync -a --delete --chown=tutedude:tutedude-deploy "$src" /opt/tutedude/express/
 runuser -u tutedude -- npm ci --omit=dev --prefix /opt/tutedude/express
 install -o tutedude -g tutedude-deploy -m 0644 "$workspace/deployment/pm2/ecosystem.config.cjs" /opt/tutedude/express/ecosystem.config.cjs
 systemctl restart tutedude-pm2.service
-systemctl is-active --quiet tutedude-pm2.service
+systemctl is-active tutedude-pm2.service
