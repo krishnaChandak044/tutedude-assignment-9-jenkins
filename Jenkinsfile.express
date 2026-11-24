@@ -9,7 +9,7 @@ pipeline {
     stage('Deploy Express') {
       steps {
         sh 'sudo /usr/local/sbin/tutedude-deploy-express "$WORKSPACE"'
-        sh 'curl --fail --silent --show-error http://127.0.0.1:3000/api/health'
+        sh 'for attempt in $(seq 1 20); do if curl --fail --silent --show-error http://127.0.0.1:3000/api/health; then exit 0; fi; sleep 1; done; echo Express health check timed out >&2; exit 1'
       }
     }
   }
